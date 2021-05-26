@@ -1,5 +1,7 @@
 /*
-© 2021 Red Hat, Inc. and others.
+SPDX-License-Identifier: Apache-2.0
+
+Copyright Contributors to the Submariner project.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -35,11 +37,11 @@ import (
 
 var supportedNetworkPlugins = []string{"generic", "canal-flannel", "weave-net", "OpenShiftSDN", "OVNKubernetes"}
 
-var validateCniCmd = &cobra.Command{
+var validateCNICmd = &cobra.Command{
 	Use:   "cni",
 	Short: "Check the CNI network plugin",
 	Long:  "This command checks if the detected CNI network plugin is supported by Submariner.",
-	Run:   validateCniConfig,
+	Run:   validateCNIConfig,
 }
 
 var (
@@ -51,10 +53,10 @@ var (
 )
 
 func init() {
-	validateCmd.AddCommand(validateCniCmd)
+	validateCmd.AddCommand(validateCNICmd)
 }
 
-func validateCniConfig(cmd *cobra.Command, args []string) {
+func validateCNIConfig(cmd *cobra.Command, args []string) {
 	configs, err := getMultipleRestConfigs(kubeConfig, kubeContexts)
 	exitOnError("Error getting REST config for cluster", err)
 

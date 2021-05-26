@@ -5,7 +5,8 @@ go 1.13
 require (
 	github.com/AlecAivazis/survey/v2 v2.2.12
 	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d // indirect
-	github.com/aws/aws-sdk-go v1.38.36
+	github.com/aws/aws-sdk-go v1.38.46
+	github.com/coreos/go-semver v0.3.0
 	github.com/go-errors/errors v1.2.0 // indirect
 	github.com/go-logr/logr v0.4.0
 	github.com/go-openapi/spec v0.20.3 // indirect
@@ -13,7 +14,7 @@ require (
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
-	github.com/hashicorp/go-version v1.3.0
+	github.com/hashicorp/go-version v1.3.0 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-isatty v0.0.12
 	github.com/mattn/go-runewidth v0.0.12 // indirect
@@ -30,11 +31,11 @@ require (
 	github.com/prometheus/client_golang v1.10.0
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/spf13/cobra v1.1.3
-	github.com/submariner-io/admiral v0.9.0-rc0.0.20210512114522-576fb44bfbdd
-	github.com/submariner-io/cloud-prepare v0.0.0-20210510154354-e7940f21b3c9
-	github.com/submariner-io/lighthouse v0.9.0-rc0.0.20210510224156-c8116fe90f3c
-	github.com/submariner-io/shipyard v0.9.1-0.20210510160832-b96b2941ec80
-	github.com/submariner-io/submariner v0.9.0-rc0.0.20210510232802-a7b0766324d4
+	github.com/submariner-io/admiral v0.10.0-m1
+	github.com/submariner-io/cloud-prepare v0.10.0-m1
+	github.com/submariner-io/lighthouse v0.10.0-m1
+	github.com/submariner-io/shipyard v0.10.0-m1
+	github.com/submariner-io/submariner v0.10.0-m1
 	github.com/ulikunitz/xz v0.5.10 // indirect
 	github.com/xlab/treeprint v1.1.0 // indirect
 	go.starlark.net v0.0.0-20210506034541-84642328b1f0 // indirect
