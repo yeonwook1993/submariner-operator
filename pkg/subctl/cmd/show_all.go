@@ -17,6 +17,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/submariner-io/submariner-operator/apis/submariner/v1alpha1"
 
 	"github.com/spf13/cobra"
 )
@@ -28,6 +29,10 @@ var showAllCmd = &cobra.Command{
  networks, endpoints, gateways, connections and component versions.`,
 	PreRunE: checkVersionMismatch,
 	Run:     showAll,
+}
+
+type Show struct {
+	Endpoints []EndpointStatus
 }
 
 func init() {
@@ -62,4 +67,9 @@ func showAll(cmd *cobra.Command, args []string) {
 		fmt.Println("\nShowing version details")
 		showVersionsFor(item.config, submariner)
 	}
+}
+
+func ShowAll(submariner *v1alpha1.Submariner) []EndpointStatus {
+	endpoints := getEndpointsStatus(submariner)
+	return endpoints
 }

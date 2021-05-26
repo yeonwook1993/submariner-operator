@@ -23,21 +23,21 @@ import (
 	"github.com/submariner-io/submariner-operator/apis/submariner/v1alpha1"
 )
 
-type endpointStatus struct {
+type EndpointStatus struct {
 	clusterID    string
-	endpointIP   string
-	publicIP     string
-	cableDriver  string
-	endpointType string
+	EndpointIP   string
+	PublicIP     string
+	CableDriver  string
+	EndpointType string
 }
 
-func newEndpointsStatusFrom(clusterID, endpointIP, publicIP, cableDriver, endpointType string) endpointStatus {
-	return endpointStatus{
+func newEndpointsStatusFrom(clusterID, endpointIP, publicIP, cableDriver, endpointType string) EndpointStatus {
+	return EndpointStatus{
 		clusterID:    clusterID,
-		endpointIP:   endpointIP,
-		publicIP:     publicIP,
-		cableDriver:  cableDriver,
-		endpointType: endpointType,
+		EndpointIP:   endpointIP,
+		PublicIP:     publicIP,
+		CableDriver:  cableDriver,
+		EndpointType: endpointType,
 	}
 }
 
@@ -53,14 +53,14 @@ func init() {
 	showCmd.AddCommand(showEndpointsCmd)
 }
 
-func getEndpointsStatus(submariner *v1alpha1.Submariner) []endpointStatus {
+func getEndpointsStatus(submariner *v1alpha1.Submariner) []EndpointStatus {
 	gateways := submariner.Status.Gateways
 
 	if gateways == nil {
 		exitWithErrorMsg("No endpoints found")
 	}
 
-	var status = make([]endpointStatus, 0, len(*gateways))
+	var status = make([]EndpointStatus, 0, len(*gateways))
 
 	for _, gateway := range *gateways {
 		status = append(status, newEndpointsStatusFrom(
@@ -103,7 +103,7 @@ func showEndpointsFor(submariner *v1alpha1.Submariner) {
 	printEndpoints(status)
 }
 
-func printEndpoints(endpoints []endpointStatus) {
+func printEndpoints(endpoints []EndpointStatus) {
 	if len(endpoints) == 0 {
 		fmt.Println("No resources found.")
 		return
@@ -117,9 +117,9 @@ func printEndpoints(endpoints []endpointStatus) {
 		fmt.Printf(
 			template,
 			item.clusterID,
-			item.endpointIP,
-			item.publicIP,
-			item.cableDriver,
-			item.endpointType)
+			item.EndpointIP,
+			item.PublicIP,
+			item.CableDriver,
+			item.EndpointType)
 	}
 }

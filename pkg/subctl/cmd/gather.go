@@ -181,6 +181,9 @@ func gatherDataByCluster(restConfig restConfig, directory string) {
 			}
 		}
 	}
+	gather.ClusterInformation(info)
+	gather.PodLogInfos = nil
+	gather.Resources = nil
 }
 
 func gatherConnectivity(dataType string, info gather.Info) bool {
