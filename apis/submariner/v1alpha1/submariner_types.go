@@ -59,6 +59,9 @@ type SubmarinerSpec struct {
 	Debug                    bool                 `json:"debug"`
 	NatEnabled               bool                 `json:"natEnabled"`
 	ServiceDiscoveryEnabled  bool                 `json:"serviceDiscoveryEnabled,omitempty"`
+	VppEndpointIP            string               `json:"VppEndpointIP"`
+	VppHostIP                string               `json:"VppHostIP"`
+	VppIP                    string               `json:"VppIP"`
 	CoreDNSCustomConfig      *CoreDNSCustomConfig `json:"coreDNSCustomConfig,omitempty"`
 	// +listType=set
 	CustomDomains  []string          `json:"customDomains,omitempty"`

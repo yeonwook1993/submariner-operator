@@ -78,6 +78,9 @@ var (
 	healthCheckInterval           uint64
 	healthCheckMaxPacketLossCount uint64
 	corednsCustomConfigMap        string
+	VppEndpointIP                 string
+	VppHostIP                     string
+	VppIP                         string
 )
 
 func init() {
@@ -96,6 +99,10 @@ func addJoinFlags(cmd *cobra.Command) {
 	cmd.Flags().IntVar(&nattPort, "nattport", 4500, "IPsec NATT port")
 	cmd.Flags().IntVar(&ikePort, "ikeport", 500, "IPsec IKE port")
 	cmd.Flags().BoolVar(&natTraversal, "natt", true, "enable NAT traversal for IPsec")
+
+	cmd.Flags().StringVar(&VppEndpointIP, "VppEndpointIP", "", "IP Address used in VPP Application")
+	cmd.Flags().StringVar(&VppHostIP, "VppHostIP", "", "Tun device IP used in Kernel Network Stack")
+	cmd.Flags().StringVar(&VppIP, "VppIP", "", "Tun device IP used in VPP Network Stack")
 
 	cmd.Flags().BoolVar(&preferredServer, "preferred-server", false,
 		"enable this cluster as a preferred server for dataplane connections")
@@ -491,6 +498,9 @@ func populateSubmarinerSpec(subctlData *datafile.SubctlData, netconfig globalnet
 		CableDriver:              cableDriver,
 		ServiceDiscoveryEnabled:  subctlData.IsServiceDiscoveryEnabled(),
 		ImageOverrides:           getImageOverrides(),
+		VppEndpointIP:            VppEndpointIP,
+		VppHostIP:                VppHostIP,
+		VppIP:                    VppIP,
 		ConnectionHealthCheck: &submariner.HealthCheckSpec{
 			Enabled:            healthCheckEnable,
 			IntervalSeconds:    healthCheckInterval,
