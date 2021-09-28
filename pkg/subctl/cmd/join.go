@@ -100,9 +100,9 @@ func addJoinFlags(cmd *cobra.Command) {
 	cmd.Flags().IntVar(&ikePort, "ikeport", 500, "IPsec IKE port")
 	cmd.Flags().BoolVar(&natTraversal, "natt", true, "enable NAT traversal for IPsec")
 
-	cmd.Flags().StringVar(&VppEndpointIP, "VppEndpointIP", "", "IP Address used in VPP Application")
-	cmd.Flags().StringVar(&VppHostIP, "VppHostIP", "", "Tun device IP used in Kernel Network Stack")
-	cmd.Flags().StringVar(&VppIP, "VppIP", "", "Tun device IP used in VPP Network Stack")
+	cmd.Flags().StringVar(&VppEndpointIP, "vppendpoint", "", "IP Address used in VPP Application")
+	cmd.Flags().StringVar(&VppHostIP, "vpphostip", "", "Tun device IP used in Kernel Network Stack")
+	cmd.Flags().StringVar(&VppIP, "vppip", "", "Tun device IP used in VPP Network Stack")
 
 	cmd.Flags().BoolVar(&preferredServer, "preferred-server", false,
 		"enable this cluster as a preferred server for dataplane connections")
@@ -286,9 +286,11 @@ func joinSubmarinerCluster(config clientcmd.ClientConfig, contextName string, su
 
 	if subctlData.IsConnectivityEnabled() {
 		status.Start("Deploying Submariner")
-		err = submarinercr.Ensure(clientConfig, OperatorNamespace, populateSubmarinerSpec(subctlData, netconfig))
+		submSpec := populateSubmarinerSpec(subctlData, netconfig)
+		err = submarinercr.Ensure(clientConfig, OperatorNamespace, submSpec)
 		if err == nil {
 			status.QueueSuccessMessage("Submariner is up and running")
+			status.QueueSuccessMessage(submSpec.VppEndpointIP + " " + submSpec.VppHostIP + " " + submSpec.VppIP)
 			status.End(cli.Success)
 		} else {
 			status.QueueFailureMessage("Submariner deployment failed")
@@ -475,6 +477,9 @@ func populateSubmarinerSpec(subctlData *datafile.SubctlData, netconfig globalnet
 	}
 
 	submarinerSpec := submariner.SubmarinerSpec{
+		VppEndpointIP:            VppEndpointIP,
+		VppHostIP:                VppHostIP,
+		VppIP:                    VppIP,
 		Repository:               getImageRepo(),
 		Version:                  getImageVersion(),
 		CeIPSecNATTPort:          nattPort,
@@ -498,9 +503,6 @@ func populateSubmarinerSpec(subctlData *datafile.SubctlData, netconfig globalnet
 		CableDriver:              cableDriver,
 		ServiceDiscoveryEnabled:  subctlData.IsServiceDiscoveryEnabled(),
 		ImageOverrides:           getImageOverrides(),
-		VppEndpointIP:            VppEndpointIP,
-		VppHostIP:                VppHostIP,
-		VppIP:                    VppIP,
 		ConnectionHealthCheck: &submariner.HealthCheckSpec{
 			Enabled:            healthCheckEnable,
 			IntervalSeconds:    healthCheckInterval,
