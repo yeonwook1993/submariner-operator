@@ -152,6 +152,9 @@ func newGatewayPodTemplate(cr *v1alpha1.Submariner) corev1.PodTemplateSpec {
 						{Name: "SUBMARINER_HEALTHCHECKENABLED", Value: strconv.FormatBool(healthCheckEnabled)},
 						{Name: "SUBMARINER_HEALTHCHECKINTERVAL", Value: strconv.FormatUint(healthCheckInterval, 10)},
 						{Name: "SUBMARINER_HEALTHCHECKMAXPACKETLOSSCOUNT", Value: strconv.FormatUint(healthCheckMaxPacketLossCount, 10)},
+						{Name: "SUBMARINER_VPPENDPOINTIP", Value: cr.Spec.VppEndpointIP},
+						{Name: "SUBMARINER_VPPHOSTIP", Value: cr.Spec.VppHostIP},
+						{Name: "SUBMARINER_VPPIP", Value: cr.Spec.VppIP},
 						{Name: "NODE_NAME", ValueFrom: &corev1.EnvVarSource{
 							FieldRef: &corev1.ObjectFieldSelector{
 								FieldPath: "spec.nodeName",
