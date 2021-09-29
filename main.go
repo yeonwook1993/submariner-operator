@@ -41,7 +41,6 @@ import (
 	"github.com/submariner-io/submariner-operator/controllers/submariner"
 	"github.com/submariner-io/submariner-operator/pkg/lighthouse"
 	crdutils "github.com/submariner-io/submariner-operator/pkg/utils/crds"
-	"github.com/submariner-io/submariner-operator/pkg/version"
 
 	// TODO: in opeartor-sdk v1 the below utilities were moved to internal
 	// TODO: update to operator-sdk v1 or find an alternate way and then change the code accordingly
@@ -78,7 +77,6 @@ func printVersion() {
 	log.Info(fmt.Sprintf("Go Version: %s", runtime.Version()))
 	log.Info(fmt.Sprintf("Go OS/Arch: %s/%s", runtime.GOOS, runtime.GOARCH))
 	log.Info(fmt.Sprintf("Version of operator-sdk: %v", sdkVersion.Version))
-	log.Info(fmt.Sprintf("Submariner operator version: %v", version.Version))
 }
 
 func init() {

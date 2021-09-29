@@ -133,6 +133,7 @@ func newGatewayPodTemplate(cr *v1alpha1.Submariner) corev1.PodTemplateSpec {
 						RunAsNonRoot:             &runAsNonRoot,
 					},
 					Env: []corev1.EnvVar{
+						{Name: "SUBMARINER_IMAGEPATH", Value: getImagePath(cr, names.GatewayImage, names.GatewayComponent)},
 						{Name: "SUBMARINER_NAMESPACE", Value: cr.Spec.Namespace},
 						{Name: "SUBMARINER_CLUSTERCIDR", Value: cr.Status.ClusterCIDR},
 						{Name: "SUBMARINER_SERVICECIDR", Value: cr.Status.ServiceCIDR},
