@@ -62,7 +62,8 @@ type SubmarinerSpec struct {
 	VppEndpointIP            string               `json:"vppEndpointIP,omitempty"`
 	VppHostIP                string               `json:"vppHostIP,omitempty"`
 	VppIP                    string               `json:"vppIP,omitempty"`
-	VppCidr                  string               `json:"vppCidr"`
+	VppCIDR                  string               `json:"vppCIDR"`
+	VppEndpointCIDR          string               `json:"vppEndpointCIDR"`
 	CoreDNSCustomConfig      *CoreDNSCustomConfig `json:"coreDNSCustomConfig,omitempty"`
 	// +listType=set
 	CustomDomains  []string          `json:"customDomains,omitempty"`

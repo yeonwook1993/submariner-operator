@@ -1,7 +1,9 @@
-set -e
-_REPO=$1
-_VER=$2
+repo=$1
+ver=$2
 rm package/.image.submariner-operator bin/submariner-operator || true
+
 make images
-docker build -t $_REPO/submariner-operator:$_VER -f package/Dockerfile.submariner-operator .
-docker push $_REPO/submariner-operator:$_VER
+docker tag quay.io/submariner/submariner-operator:${ver} ${repo}/submariner-operator:${ver}
+docker tag quay.io/submariner/submariner-operator:${ver}
+docker push ${repo}/submariner-operator:${ver}
+

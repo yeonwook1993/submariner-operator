@@ -81,7 +81,8 @@ var (
 	vppEndpointIP                 string
 	vppHostIP                     string
 	vppIP                         string
-	vppCidr                       string
+	vppCIDR                       string
+	vppEndpointCIDR               string
 )
 
 func init() {
@@ -104,7 +105,8 @@ func addJoinFlags(cmd *cobra.Command) {
 	cmd.Flags().StringVar(&vppEndpointIP, "vppendpoint", "", "IP Address used in VPP Application")
 	cmd.Flags().StringVar(&vppHostIP, "vpphostip", "", "Tun device IP used in Kernel Network Stack")
 	cmd.Flags().StringVar(&vppIP, "vppip", "", "Tun device IP used in VPP Network Stack")
-	cmd.Flags().StringVar(&vppCidr, "vppcidr", "", "vpp ip cidr : default 24")
+	cmd.Flags().StringVar(&vppCIDR, "vppcidr", "", "vpp ip CIDR : default 24")
+	cmd.Flags().StringVar(&vppEndpointCIDR, "vppendpointcidr", "", "vpp Endpoint CIDR : default 16")
 
 	cmd.Flags().BoolVar(&preferredServer, "preferred-server", false,
 		"enable this cluster as a preferred server for dataplane connections")
@@ -482,7 +484,8 @@ func populateSubmarinerSpec(subctlData *datafile.SubctlData, netconfig globalnet
 		VppEndpointIP:            vppEndpointIP,
 		VppHostIP:                vppHostIP,
 		VppIP:                    vppIP,
-		VppCidr:                  vppCidr,
+		VppCIDR:                  vppCIDR,
+		VppEndpointCIDR:          vppEndpointCIDR,
 		Repository:               getImageRepo(),
 		Version:                  getImageVersion(),
 		CeIPSecNATTPort:          nattPort,

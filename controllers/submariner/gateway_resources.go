@@ -155,7 +155,8 @@ func newGatewayPodTemplate(cr *v1alpha1.Submariner) corev1.PodTemplateSpec {
 						{Name: "SUBMARINER_VPPENDPOINTIP", Value: cr.Spec.VppEndpointIP},
 						{Name: "SUBMARINER_VPPHOSTIP", Value: cr.Spec.VppHostIP},
 						{Name: "SUBMARINER_VPPIP", Value: cr.Spec.VppIP},
-						{Name: "SUBMARINER_VPPCIDR", Value: cr.Spec.VppCidr},
+						{Name: "SUBMARINER_VPPCIDR", Value: cr.Spec.VppCIDR},
+						{Name: "SUBMARINER_VPPENDPOINTCIDR", Value: cr.Spec.VppEndpointCIDR},
 						{Name: "NODE_NAME", ValueFrom: &corev1.EnvVarSource{
 							FieldRef: &corev1.ObjectFieldSelector{
 								FieldPath: "spec.nodeName",
